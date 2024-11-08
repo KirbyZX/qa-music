@@ -9,10 +9,9 @@ NOTES_IN_OCTAVE = len(NOTES)
 PATTERN = r"([A-G]#?)(\d)"
 
 
-def notes_to_numbers(notes: list[str]) -> list[int]:
+def notesToNumbers(notes: list[str]) -> list[int]:
 
     numbers = []
-    
     
     for note in notes:
         m = re.match(PATTERN, note)
@@ -36,14 +35,13 @@ def writeToMidi(notes: list[str], filename: str):
     channel = 0
     time = 0  # In beats
     duration = 1  # In beats
-    tempo = 100  # In BPM
+    tempo = 120  # In BPM
     volume = 100  # 0-127, as per the MIDI standard
 
-    midi = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created
-    # automatically)
+    midi = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created automatically)
     midi.addTempo(track, time, tempo)
 
-    for i, pitch in enumerate(notes_to_numbers(notes)):
+    for i, pitch in enumerate(notesToNumbers(notes)):
         midi.addNote(track, channel, pitch, time + i, duration, volume)
 
     with open(filename, "wb") as output_file:
@@ -73,7 +71,7 @@ def playMidi(filename):
         raise SystemExit
 
 
-seq = ['C6','D4','D#4','F4','C5','A#4','B4']
+seq = ['C6','D4','D#4','F4','C5','A#4','A4']
 filename = "test.mid"
 
 writeToMidi(seq, filename)
