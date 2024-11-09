@@ -69,10 +69,3 @@ def playMidi(filename):
         pygame.mixer.music.fadeout(1000)
         pygame.mixer.music.stop()
         raise SystemExit
-
-
-seq = ['C6','D4','D#4','F4','C5','A#4','A4']
-filename = "test.mid"
-
-writeToMidi(seq, filename)
-playMidi(filename)
